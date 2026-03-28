@@ -468,6 +468,7 @@ export function initGame(): () => void {
       invTimer: 0,
       animFrame: 0, animTimer: 0,
       dead: false,
+      jumpBuffer: 0,
     };
   }
 
@@ -478,11 +479,16 @@ export function initGame(): () => void {
     if (input.left)  { player.vx = -WALK_SPEED; player.facingRight = false; }
     if (input.right) { player.vx =  WALK_SPEED; player.facingRight = true; }
 
-    if (input.jumpEdge && player.onGround) {
+    if (input.jumpEdge) {
+      player.jumpBuffer = 0.12;
+      input.jumpEdge = false;
+    }
+    if (player.jumpBuffer > 0) player.jumpBuffer -= dt;
+    if (player.jumpBuffer > 0 && player.onGround) {
       player.vy = JUMP_VEL;
       player.onGround = false;
+      player.jumpBuffer = 0;
     }
-    input.jumpEdge = false;
 
     applyPhysics(player, dt);
     resolveVsTiles(player);
