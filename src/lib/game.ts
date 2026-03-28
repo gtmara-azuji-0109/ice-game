@@ -480,7 +480,7 @@ export function initGame(): () => void {
     if (input.right) { player.vx =  WALK_SPEED; player.facingRight = true; }
 
     if (input.jumpEdge) {
-      player.jumpBuffer = 0.12;
+      player.jumpBuffer = 0.25;
       input.jumpEdge = false;
     }
     if (player.jumpBuffer > 0) player.jumpBuffer -= dt;
