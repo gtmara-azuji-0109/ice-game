@@ -280,7 +280,7 @@ export function initGame(): () => void {
     const placed: number[] = [];
 
     for (let g = 0; g < numGaps; g++) {
-      let pos, tries = 0;
+      let pos: number, tries = 0;
       do {
         pos = 1 + Math.floor(Math.random() * (COLS - 2 - gapSize));
         tries++;
